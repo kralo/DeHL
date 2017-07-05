@@ -59,6 +59,7 @@ type
   public
     { Constructors }
     constructor Create(const Ascending: Boolean = true); overload;
+    procedure init(const Ascending: Boolean = true); overload;
     constructor Create(const AEnumerable: IEnumerable<KVPair<TKey,TValue>>; const Ascending: Boolean = true); overload;
     constructor Create(const AArray: array of KVPair<TKey,TValue>; const Ascending: Boolean = true); overload;
     constructor Create(const AArray: TDynamicArray<KVPair<TKey, TValue>>; const Ascending: Boolean = true); overload;
@@ -140,6 +141,14 @@ begin
   FAscSort := Ascending;
   inherited Create();
 end;
+
+procedure TSortedDistinctMultiMap<TKey, TValue>.init(const Ascending: Boolean);
+begin
+  { Do the dew and continue }
+  FAscSort := Ascending;
+  inherited Create();
+end;
+
 
 constructor TSortedDistinctMultiMap<TKey, TValue>.Create(
   const AEnumerable: IEnumerable<KVPair<TKey, TValue>>;
@@ -233,7 +242,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  init(LAsc);
 end;
 
 procedure TSortedDistinctMultiMap<TKey, TValue>.StartSerializing(const AData: TSerializationData);

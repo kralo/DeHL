@@ -227,6 +227,7 @@ type
     ///  <param name="AAscending">A value specifying whether the keys are sorted in asceding order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AAscending: Boolean = true); overload;
+    procedure init(const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="ACollection">A collection to copy the key-value pairs from.</param>
@@ -264,6 +265,8 @@ type
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AKeyType"/> is <c>nil</c>.</exception>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AValueType"/> is <c>nil</c>.</exception>
     constructor Create(const AKeyType: IType<TKey>; const AValueType: IType<TValue>;
+      const AAscending: Boolean = true); overload;
+    procedure init(const AKeyType: IType<TKey>; const AValueType: IType<TValue>;
       const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
@@ -909,6 +912,11 @@ begin
   Create(TType<TKey>.Default, TType<TValue>.Default, AAscending);
 end;
 
+procedure TSortedDictionary<TKey, TValue>.init(const AAscending: Boolean);
+begin
+  init(TType<TKey>.Default, TType<TValue>.Default, AAscending);
+end;
+
 constructor TSortedDictionary<TKey, TValue>.Create(const ACollection: IEnumerable<KVPair<TKey, TValue>>;
   const AAscending: Boolean);
 begin
@@ -938,6 +946,31 @@ begin
 end;
 
 constructor TSortedDictionary<TKey, TValue>.Create(const AKeyType: IType<TKey>;
+  const AValueType: IType<TValue>; const AAscending: Boolean);
+begin
+  { Initialize instance }
+  if (AKeyType = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('AKeyType');
+
+  if (AValueType = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('AValueType');
+
+  { Install types }
+  InstallTypes(AKeyType, AValueType);
+
+  FKeyCollection := TKeyCollection.Create(Self);
+  FValueCollection := TValueCollection.Create(Self);
+
+  FVer := 0;
+  FCount := 0;
+
+  if AAscending then
+    FSignFix := 1
+  else
+    FSignFix := -1;
+end;
+
+procedure TSortedDictionary<TKey, TValue>.init(const AKeyType: IType<TKey>;
   const AValueType: IType<TValue>; const AAscending: Boolean);
 begin
   { Initialize instance }
@@ -1414,7 +1447,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  init(LAsc);
 end;
 
 procedure TSortedDictionary<TKey, TValue>.StartSerializing(const AData: TSerializationData);

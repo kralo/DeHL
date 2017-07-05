@@ -118,6 +118,7 @@ type
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AAscending: Boolean = true); overload;
+    procedure init(const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="ACollection">A collection to copy elements from.</param>
@@ -125,6 +126,7 @@ type
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="ACollection"/> is <c>nil</c>.</exception>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
+    procedure init(const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AArray">An array to copy elements from.</param>
@@ -149,6 +151,7 @@ type
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the set.</param>
@@ -157,6 +160,7 @@ type
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="ACollection"/> is <c>nil</c>.</exception>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the set.</param>
@@ -718,10 +722,21 @@ begin
   Create(TType<T>.Default, AAscending);
 end;
 
+procedure TSortedSet<T>.init(const AAscending: Boolean);
+begin
+  init(TType<T>.Default, AAscending);
+end;
+
 constructor TSortedSet<T>.Create(const ACollection: IEnumerable<T>;
   const AAscending: Boolean);
 begin
   Create(TType<T>.Default, ACollection, AAscending);
+end;
+
+procedure TSortedSet<T>.init(const ACollection: IEnumerable<T>;
+  const AAscending: Boolean);
+begin
+  init(TType<T>.Default, ACollection, AAscending);
 end;
 
 constructor TSortedSet<T>.Create(const AType: IType<T>;
@@ -742,7 +757,42 @@ begin
   end;
 end;
 
+procedure TSortedSet<T>.init(const AType: IType<T>;
+  const ACollection: IEnumerable<T>; const AAscending: Boolean);
+var
+  V: T;
+begin
+  { Call upper constructor }
+  init(AType, AAscending);
+
+  if (ACollection = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('ACollection');
+
+  { Pump in all items }
+  for V in ACollection do
+  begin
+    Add(V);
+  end;
+end;
+
 constructor TSortedSet<T>.Create(const AType: IType<T>; const AAscending: Boolean);
+begin
+  { Initialize instance }
+  if (AType = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('AType');
+
+  InstallType(AType);
+
+  FVer := 0;
+  FCount := 0;
+
+  if AAscending then
+    FSignFix := 1
+  else
+    FSignFix := -1;
+end;
+
+procedure TSortedSet<T>.init(const AType: IType<T>; const AAscending: Boolean);
 begin
   { Initialize instance }
   if (AType = nil) then
@@ -1209,7 +1259,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  init(LAsc);
 end;
 
 procedure TSortedSet<T>.StartSerializing(const AData: TSerializationData);

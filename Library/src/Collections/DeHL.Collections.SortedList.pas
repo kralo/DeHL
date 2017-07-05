@@ -106,12 +106,14 @@ type
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AAscending: Boolean = true); overload;
+    procedure init(const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <param name="AInitialiCapacity">Specifies the initial capacity of the list.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AInitialCapacity: NativeUInt; const AAscending: Boolean = true); overload;
+    procedure init(const AInitialCapacity: NativeUInt; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="ACollection">A collection to copy elements from.</param>
@@ -119,30 +121,35 @@ type
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="ACollection"/> is <c>nil</c>.</exception>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
+    procedure init(const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AArray">An array to copy elements from.</param>
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AArray: array of T; const AAscending: Boolean = true); overload;
+    procedure init(const AArray: array of T; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AArray">An array to copy elements from.</param>
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AArray: TDynamicArray<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AArray: TDynamicArray<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AArray">An array to copy elements from.</param>
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AArray: TFixedArray<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AArray: TFixedArray<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the list.</param>
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the list.</param>
@@ -150,6 +157,7 @@ type
     ///  <param name="AInitialiCapacity">Specifies the initial capacity of the list.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const AInitialCapacity: NativeUInt; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const AInitialCapacity: NativeUInt; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the list.</param>
@@ -158,6 +166,7 @@ type
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="ACollection"/> is <c>nil</c>.</exception>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const ACollection: IEnumerable<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the list.</param>
@@ -165,6 +174,7 @@ type
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const AArray: array of T; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const AArray: array of T; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the list.</param>
@@ -172,6 +182,7 @@ type
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const AArray: TDynamicArray<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const AArray: TDynamicArray<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the list.</param>
@@ -179,6 +190,7 @@ type
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>; const AArray: TFixedArray<T>; const AAscending: Boolean = true); overload;
+    procedure init(const AType: IType<T>; const AArray: TFixedArray<T>; const AAscending: Boolean = true); overload;
 
     ///  <summary>Destroys this instance.</summary>
     ///  <remarks>Do not call this method directly, call <c>Free</c> instead.</remarks>
@@ -678,6 +690,12 @@ begin
   Create(AType, DefaultArrayLength, AAscending);
 end;
 
+procedure TSortedList<T>.init(const AType: IType<T>; const AAscending: Boolean);
+begin
+  { Call upper constructor }
+  init(AType, DefaultArrayLength, AAscending);
+end;
+
 constructor TSortedList<T>.Create(const AType: IType<T>;
   const ACollection: IEnumerable<T>; const AAscending: Boolean);
 var
@@ -698,9 +716,34 @@ begin
   end;
 end;
 
+procedure TSortedList<T>.init(const AType: IType<T>;
+  const ACollection: IEnumerable<T>; const AAscending: Boolean);
+var
+  V: T;
+begin
+  { Call upper constructor }
+  init(AType, DefaultArrayLength, AAscending);
+
+  { Initialize instance }
+  if (ACollection = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('ACollection');
+
+  { Try to copy the given Enumerable }
+  for V in ACollection do
+  begin
+    { Perform a simple push }
+    Add(V);
+  end;
+end;
+
 constructor TSortedList<T>.Create(const AAscending: Boolean);
 begin
   Create(TType<T>.Default, AAscending);
+end;
+
+procedure TSortedList<T>.init(const AAscending: Boolean);
+begin
+  init(TType<T>.Default, AAscending);
 end;
 
 constructor TSortedList<T>.Create(const AInitialCapacity: NativeUInt; const AAscending: Boolean);
@@ -708,12 +751,38 @@ begin
   Create(TType<T>.Default, AInitialCapacity, AAscending);
 end;
 
+procedure TSortedList<T>.init(const AInitialCapacity: NativeUInt; const AAscending: Boolean);
+begin
+  init(TType<T>.Default, AInitialCapacity, AAscending);
+end;
+
 constructor TSortedList<T>.Create(const ACollection: IEnumerable<T>; const AAscending: Boolean);
 begin
   Create(TType<T>.Default, ACollection, AAscending);
 end;
 
+procedure TSortedList<T>.init(const ACollection: IEnumerable<T>; const AAscending: Boolean);
+begin
+  init(TType<T>.Default, ACollection, AAscending);
+end;
+
 constructor TSortedList<T>.Create(const AType: IType<T>;
+  const AInitialCapacity: NativeUInt; const AAscending: Boolean);
+begin
+  { Initialize instance }
+  if (AType = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('AType');
+
+  InstallType(AType);
+
+  FLength := 0;
+  FVer := 0;
+  FAscending := AAscending;
+
+  SetLength(FArray, AInitialCapacity);
+end;
+
+procedure TSortedList<T>.init(const AType: IType<T>;
   const AInitialCapacity: NativeUInt; const AAscending: Boolean);
 begin
   { Initialize instance }
@@ -1076,7 +1145,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  init(LAsc);
 end;
 
 procedure TSortedList<T>.StartSerializing(const AData: TSerializationData);
@@ -1096,6 +1165,11 @@ begin
   Create(TType<T>.Default, AArray, AAscending);
 end;
 
+procedure TSortedList<T>.init(const AArray: array of T; const AAscending: Boolean);
+begin
+  init(TType<T>.Default, AArray, AAscending);
+end;
+
 constructor TSortedList<T>.Create(const AType: IType<T>; const AArray: array of T; const AAscending: Boolean);
 var
   I: NativeInt;
@@ -1110,14 +1184,38 @@ begin
   end;
 end;
 
+procedure TSortedList<T>.init(const AType: IType<T>; const AArray: array of T; const AAscending: Boolean);
+var
+  I: NativeInt;
+begin
+  { Call upper constructor }
+  init(AType, DefaultArrayLength, AAscending);
+
+  { Copy from array }
+  for I := 0 to Length(AArray) - 1 do
+  begin
+    Add(AArray[I]);
+  end;
+end;
+
 constructor TSortedList<T>.Create(const AArray: TFixedArray<T>; const AAscending: Boolean);
 begin
   Create(TType<T>.Default, AArray, AAscending);
 end;
 
+procedure TSortedList<T>.init(const AArray: TFixedArray<T>; const AAscending: Boolean);
+begin
+  init(TType<T>.Default, AArray, AAscending);
+end;
+
 constructor TSortedList<T>.Create(const AArray: TDynamicArray<T>; const AAscending: Boolean);
 begin
   Create(TType<T>.Default, AArray, AAscending);
+end;
+
+procedure TSortedList<T>.init(const AArray: TDynamicArray<T>; const AAscending: Boolean);
+begin
+  init(TType<T>.Default, AArray, AAscending);
 end;
 
 constructor TSortedList<T>.Create(const AType: IType<T>; const AArray: TFixedArray<T>; const AAscending: Boolean);
@@ -1135,12 +1233,42 @@ begin
     end;
 end;
 
+procedure TSortedList<T>.init(const AType: IType<T>; const AArray: TFixedArray<T>; const AAscending: Boolean);
+var
+  I: NativeUInt;
+begin
+  { Call upper constructor }
+  init(AType, DefaultArrayLength, AAscending);
+
+  { Copy from array }
+  if AArray.Length > 0 then
+    for I := 0 to AArray.Length - 1 do
+    begin
+      Add(AArray[I]);
+    end;
+end;
+
 constructor TSortedList<T>.Create(const AType: IType<T>; const AArray: TDynamicArray<T>; const AAscending: Boolean);
 var
   I: NativeUInt;
 begin
   { Call upper constructor }
   Create(AType, DefaultArrayLength, AAscending);
+
+  { Copy from array }
+  if AArray.Length > 0 then
+    for I := 0 to AArray.Length - 1 do
+    begin
+      Add(AArray[I]);
+    end;
+end;
+
+procedure TSortedList<T>.init(const AType: IType<T>; const AArray: TDynamicArray<T>; const AAscending: Boolean);
+var
+  I: NativeUInt;
+begin
+  { Call upper constructor }
+  init(AType, DefaultArrayLength, AAscending);
 
   { Copy from array }
   if AArray.Length > 0 then

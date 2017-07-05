@@ -83,6 +83,7 @@ type
     ///  <param name="AAscendingValues">A value specifying whether the values are sorted in asceding order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AAscendingKeys: Boolean = true; const AAscendingValues: Boolean = true); overload;
+    procedure init(const AAscendingKeys: Boolean = true; const AAscendingValues: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="ACollection">A collection to copy the key-value pairs from.</param>
@@ -272,6 +273,15 @@ begin
   inherited Create();
 end;
 
+procedure TDoubleSortedBidiMap<TKey, TValue>.init(const AAscendingKeys, AAscendingValues: Boolean);
+begin
+  { Do da dew and continue! }
+  FAscKeys := AAscendingKeys;
+  FAscValues := AAscendingValues;
+
+  inherited Create();
+end;
+
 constructor TDoubleSortedBidiMap<TKey, TValue>.Create(
   const ACollection: IEnumerable<KVPair<TKey, TValue>>;
   const AAscendingKeys, AAscendingValues: Boolean);
@@ -381,7 +391,7 @@ begin
   AData.GetValue(SSerAscendingValues, LAscValues);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAscKeys, LAscValues);
+  init(LAscKeys, LAscValues);
 end;
 
 procedure TDoubleSortedBidiMap<TKey, TValue>.StartSerializing(const AData: TSerializationData);

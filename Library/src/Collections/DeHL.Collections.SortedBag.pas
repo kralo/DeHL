@@ -70,6 +70,7 @@ type
     ///  <param name="AAscending">Specifies whether the elements are kept sorted in ascending order. Default is <c>True</c>.</param>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(const AAscending: Boolean = true); overload;
+    procedure init(const AAscending: Boolean = true); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="ACollection">A collection to copy elements from.</param>
@@ -202,7 +203,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  init(LAsc);
 end;
 
 procedure TSortedBag<T>.StartSerializing(const AData: TSerializationData);
@@ -224,6 +225,14 @@ begin
   FAscSort := AAscending;
   inherited Create();
 end;
+
+procedure TSortedBag<T>.init(const AAscending: Boolean);
+begin
+  { Call upper constructor }
+  FAscSort := AAscending;
+  inherited Create();
+end;
+
 
 constructor TSortedBag<T>.Create(const ACollection: IEnumerable<T>; const AAscending: Boolean);
 begin

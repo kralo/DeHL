@@ -1458,7 +1458,7 @@ type
   public
     //TODO: doc me
     constructor Create();
-
+    procedure init();
     ///  <summary>Returns the biggest element.</summary>
     ///  <returns>An element from the collection considered to have the biggest value.</returns>
     ///  <exception cref="DeHL.Exceptions|ECollectionEmptyException">The collection is empty.</exception>
@@ -1883,9 +1883,9 @@ type
       IEnexAssociativeCollection<TKey, TValue>)
   private
     FKeyType: IType<TKey>;
-    FValueType: IType<TValue>;
 
   protected
+    FValueType: IType<TValue>;
     ///  <summary>Specifies the type object that describes the keys of the stored pairs.</summary>
     ///  <returns>A type object describing the keys.</returns>
     property KeyType: IType<TKey> read FKeyType;
@@ -3401,6 +3401,11 @@ begin
 end;
 
 constructor TEnexCollection<T>.Create;
+begin
+  InstallType(TType<T>.Default);
+end;
+
+procedure TEnexCollection<T>.init;
 begin
   InstallType(TType<T>.Default);
 end;

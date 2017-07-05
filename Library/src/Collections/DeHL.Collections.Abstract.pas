@@ -1058,7 +1058,7 @@ type
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <remarks>The default type object is requested.</remarks>
     constructor Create(); overload;
-
+    procedure init(); overload;
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="ACollection">A collection to copy elements from.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="ACollection"/> is <c>nil</c>.</exception>
@@ -1084,6 +1084,7 @@ type
     ///  <param name="AType">A type object decribing the elements in the bag.</param>
     ///  <exception cref="DeHL.Exceptions|ENilArgumentException"><paramref name="AType"/> is <c>nil</c>.</exception>
     constructor Create(const AType: IType<T>); overload;
+    procedure init(const AType: IType<T>); overload;
 
     ///  <summary>Creates a new instance of this class.</summary>
     ///  <param name="AType">A type object decribing the elements in the bag.</param>
@@ -2921,6 +2922,12 @@ begin
   Create(TType<T>.Default);
 end;
 
+procedure TAbstractBag<T>.init();
+begin
+  { Call upper constructor }
+  init(TType<T>.Default);
+end;
+
 constructor TAbstractBag<T>.Create(const ACollection: IEnumerable<T>);
 begin
   { Call upper constructor }
@@ -2957,6 +2964,19 @@ begin
 end;
 
 constructor TAbstractBag<T>.Create(const AType: IType<T>);
+begin
+  { Initialize instance }
+  if (AType = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('AType');
+
+  InstallType(AType);
+  FDictionary := CreateDictionary(ElementType);
+
+  FVer := 0;
+  FKnownCount := 0;
+end;
+
+procedure TAbstractBag<T>.init(const AType: IType<T>);
 begin
   { Initialize instance }
   if (AType = nil) then

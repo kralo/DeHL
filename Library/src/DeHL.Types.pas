@@ -5165,7 +5165,7 @@ procedure TMaybeObjectWrapperType<T>.Cleanup(var AValue: T);
 begin
   { Only free if it's an object! }
   if (FAllowCleanup) and (TypeInfo <> nil) and (TypeInfo^.Kind = tkClass) then
-    FreeAndNil(TObject(AValue));
+    FreeAndNil(AValue);
 end;
 
 function TMaybeObjectWrapperType<T>.Management: TTypeManagement;

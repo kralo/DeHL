@@ -100,6 +100,7 @@ type
     { Constructors }
     //TODO: doc me
     constructor Create(const Ascending: Boolean = true); overload;
+    procedure init(const Ascending: Boolean = true); overload;
     //TODO: doc me
     constructor Create(const InitialCapacity: NativeUInt; const Ascending: Boolean = true); overload;
     //TODO: doc me
@@ -116,6 +117,9 @@ type
       //TODO: doc me
     constructor Create(const APriorityType: IType<TPriority>; const AValueType: IType<TValue>;
       const InitialCapacity: NativeUInt; const Ascending: Boolean = true); overload;
+    procedure init(const APriorityType: IType<TPriority>; const AValueType: IType<TValue>;
+      const InitialCapacity: NativeUInt; const Ascending: Boolean = true); overload;
+
       //TODO: doc me
     constructor Create(const APriorityType: IType<TPriority>; const AValueType: IType<TValue>;
       const AEnumerable: IEnumerable<KVPair<TPriority, TValue>>; const Ascending: Boolean = true); overload;
@@ -282,6 +286,12 @@ begin
   Create(TType<TPriority>.Default, TType<TValue>.Default, DefaultArrayLength, Ascending);
 end;
 
+procedure TPriorityQueue<TPriority, TValue>.init(const Ascending: Boolean);
+begin
+  { Call upper constructor }
+  init(TType<TPriority>.Default, TType<TValue>.Default, DefaultArrayLength, Ascending);
+end;
+
 constructor TPriorityQueue<TPriority, TValue>.Create(const AArray: TDynamicArray<KVPair<TPriority, TValue>>;
   const Ascending: Boolean);
 begin
@@ -341,6 +351,32 @@ begin
 end;
 
 constructor TPriorityQueue<TPriority, TValue>.Create(
+  const APriorityType: IType<TPriority>;
+  const AValueType: IType<TValue>;
+  const InitialCapacity: NativeUInt;
+  const Ascending: Boolean);
+begin
+  { Initialize instance }
+  if (APriorityType = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('APriorityType');
+
+  if (AValueType = nil) then
+     ExceptionHelper.Throw_ArgumentNilError('AValueType');
+
+  { Install types }
+  InstallTypes(APriorityType, AValueType);
+
+  SetLength(FArray, InitialCapacity);
+  FVer := 0;
+  FCount := 0;
+
+  if Ascending then
+    FSign := 1
+  else
+    FSign := -1;
+end;
+
+procedure TPriorityQueue<TPriority, TValue>.init(
   const APriorityType: IType<TPriority>;
   const AValueType: IType<TValue>;
   const InitialCapacity: NativeUInt;
@@ -596,7 +632,7 @@ begin
   AData.GetValue(SSerAscendingKeys, LAsc);
 
   { Call the constructor in this instance to initialize myself first }
-  Create(LAsc);
+  init(LAsc);
 end;
 
 procedure TPriorityQueue<TPriority, TValue>.StartSerializing(const AData: TSerializationData);
