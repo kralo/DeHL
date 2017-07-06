@@ -123,19 +123,19 @@ procedure TTestBigDecimal.SetUp;
 begin
   inherited;
 
-  FOldDec := DecimalSeparator;
-  FOldTh := ThousandSeparator;
+  FOldDec := FormatSettings.DecimalSeparator;
+  FOldTh := FormatSettings.ThousandSeparator;
 
-  DecimalSeparator := '.';
-  ThousandSeparator := ',';
+  FormatSettings.DecimalSeparator := '.';
+  FormatSettings.ThousandSeparator := ',';
 end;
 
 procedure TTestBigDecimal.TearDown;
 begin
   inherited;
 
-  DecimalSeparator := FOldDec;
-  ThousandSeparator := FOldTh;
+  FormatSettings.DecimalSeparator := FOldDec;
+  FormatSettings.ThousandSeparator := FOldTh;
 end;
 
 procedure TTestBigDecimal.TestOp(const X, Y: BigDecimal; const AComp: NativeInt);

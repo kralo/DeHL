@@ -466,7 +466,7 @@ begin
   II := TType<BigDecimal>.Default;
 
   { Test From BigInteger }
-  BC := BigDecimal.Parse('-3217898990328019376215315672563761235521763' + DecimalSeparator + '512673567123440908109174083265479134');
+  BC := BigDecimal.Parse('-3217898990328019376215315672563761235521763' + FormatSettings.DecimalSeparator + '512673567123440908109174083265479134');
   Check(II.TryConvertToVariant(BC, V) and (V = Variant(BC)));
   Check(II.ConvertToVariant(BC) = V);
 
@@ -474,7 +474,7 @@ begin
   Check(II.TryConvertToVariant(BC, V) and (V = Variant(BC)));
   Check(II.ConvertToVariant(BC) = V);
 
-  BC := BigDecimal.Parse('17772882771' + DecimalSeparator + '0000011');
+  BC := BigDecimal.Parse('17772882771' + FormatSettings.DecimalSeparator + '0000011');
   Check(II.TryConvertToVariant(BC, V) and (V = Variant(BC)));
   Check(II.ConvertToVariant(BC) = V);
 
@@ -487,7 +487,7 @@ begin
   Check(II.TryConvertFromVariant(V, BC) and (BC.ToString = V));
   Check(II.ConvertFromVariant(V) = BC.ToString);
 
-  V := BigDecimal.Parse('3213213123111111222222222' + DecimalSeparator + '888');
+  V := BigDecimal.Parse('3213213123111111222222222' + FormatSettings.DecimalSeparator + '888');
   Check(II.TryConvertFromVariant(V, BC) and (BC.ToString = V));
   Check(II.ConvertFromVariant(V) = BC.ToString);
 

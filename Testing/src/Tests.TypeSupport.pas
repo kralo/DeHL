@@ -212,8 +212,8 @@ begin
   inherited;
 
   { Set the new float separator }
-  FOldSep := DecimalSeparator;
-  DecimalSeparator := '.';
+  FOldSep := FormatSettings.DecimalSeparator;
+  FormatSettings.DecimalSeparator := '.';
 end;
 
 procedure TTestTypes.TearDown;
@@ -221,7 +221,7 @@ begin
   inherited;
 
   { Set the old float separator }
-  DecimalSeparator := FOldSep;
+  FormatSettings.DecimalSeparator := FOldSep;
 end;
 
 procedure TTestTypes.TestAnonymousMethod;

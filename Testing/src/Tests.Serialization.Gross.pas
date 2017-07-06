@@ -1926,7 +1926,7 @@ var
   LInput: BigDecimal;
   LOutXml, LOutIni, LOutBin: BigDecimal;
 begin
-  LInput := BigDecimal.Parse('37218937891273928643728563023427346283' + DecimalSeparator + '8493207416082644213254314');
+  LInput := BigDecimal.Parse('37218937891273928643728563023427346283' + FormatSettings.DecimalSeparator + '8493207416082644213254314');
 
   LOutXml := SerializeInXML<BigDecimal>(LInput);
   LOutIni := SerializeInIni<BigDecimal>(LInput);

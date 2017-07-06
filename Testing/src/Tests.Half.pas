@@ -458,7 +458,7 @@ begin
   Check(Support.GenerateHashCode(Y) = Support.GenerateHashCode(Y), 'Expected Support.GenerateHashCode(Y) to be stable!');
   Check(Support.GenerateHashCode(Y) <> Support.GenerateHashCode(X), 'Expected Support.GenerateHashCode(X/Y) to be different!');
 
-  Check(Support.GetString(X) = '10' + DecimalSeparator + '4453125', 'Expected Support.GetString(X) = "10.4453125"');
+  Check(Support.GetString(X) = '10' + FormatSettings.DecimalSeparator + '4453125', 'Expected Support.GetString(X) = "10.4453125"');
   Check(Support.GetString(Y) = '10', 'Expected Support.GetString(Y) = "10"');
 
   Check(Support.Name = 'Half', 'Type Name = "Half"');
