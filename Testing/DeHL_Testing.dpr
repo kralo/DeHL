@@ -33,7 +33,7 @@ uses
   Tests.References in 'src\Tests.References.pas',
   Tests.Singleton in 'src\Tests.Singleton.pas',
   Tests.Converter in 'src\Tests.Converter.pas',
-  Tests.WideCharSet in 'src\Tests.WideCharSet.pas',
+  //Tests.WideCharSet in 'src\Tests.WideCharSet.pas',
   Tests.Date in 'src\Tests.Date.pas',
   Tests.DateTime in 'src\Tests.DateTime.pas',
   Tests.Time in 'src\Tests.Time.pas',
