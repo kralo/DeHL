@@ -1814,7 +1814,7 @@ begin
   (*
      Step 1: Skip whitespaces until we find any non-whitespace
   *)
-  while (LIdx < Length(AStr)) and IsWhiteSpace(AStr, LIdx) do
+  while (LIdx < Length(AStr)) and Char.IsWhiteSpace(AStr, LIdx) do
     Inc(LIdx);
 
   if LIdx > Length(AStr) then

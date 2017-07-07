@@ -4344,7 +4344,7 @@ end;
 
 function TUCS4CharType.GetString(const AValue: UCS4Char): String;
 begin
-  Result := ConvertFromUtf32(AValue);
+  Result := Char.ConvertFromUtf32(AValue);
 end;
 
 function TUCS4CharType.TryConvertFromVariant(const AValue: Variant; out ORes: UCS4Char): Boolean;
@@ -4354,7 +4354,7 @@ begin
   { Variant type-cast }
   try
     S := AValue;
-    ORes := ConvertToUtf32(S, 1);
+    ORes := Char.ConvertToUtf32(S, 1);
   except
     Exit(false);
   end;
@@ -4364,7 +4364,7 @@ end;
 
 function TUCS4CharType.TryConvertToVariant(const AValue: UCS4Char; out ORes: Variant): Boolean;
 begin
-  ORes := ConvertFromUtf32(AValue);
+  ORes := Char.ConvertFromUtf32(AValue);
   Result := true;
 end;
 
@@ -4373,13 +4373,13 @@ var
   LValue: String;
 begin
   AContext.GetValue(AInfo, LValue);
-  AValue := ConvertToUtf32(LValue, 1);
+  AValue := Char.ConvertToUtf32(LValue, 1);
 end;
 
 procedure TUCS4CharType.DoSerialize(const AInfo: TValueInfo; const AValue: UCS4Char; const AContext: ISerializationContext);
 begin
   { Transform into an UTF16 string }
-  AContext.AddValue(AInfo, ConvertFromUtf32(AValue));
+  AContext.AddValue(AInfo, Char.ConvertFromUtf32(AValue));
 end;
 
 { TUCS4StringType }

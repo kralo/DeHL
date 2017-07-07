@@ -806,8 +806,8 @@ begin
   SetString(LUpRight, ARight, MaxLen);
 
   { Upper case them }
-  LUpLeft := Character.ToUpper(LUpLeft);
-  LUpRight := Character.ToUpper(LUpRight);
+  LUpLeft := Char.ToUpper(LUpLeft);
+  LUpRight := Char.ToUpper(LUpRight);
 
   { And finally we can compare! }
   Result := BinaryCompare(Pointer(LUpLeft), Pointer(LUpRight), MaxLen * SizeOf(WideChar));
@@ -999,7 +999,7 @@ var
 begin
   { Check if each char is whitespace }
   for I := 1 to System.Length(FString) do
-    if not Character.IsWhiteSpace(FString, I) then
+    if not Char.IsWhiteSpace(FString, I) then
       Exit(false);
 
   { String was either empty or contained whitespaces only }
@@ -1499,7 +1499,7 @@ end;
 function TString.ToLowerInvariant: TString;
 begin
   { Use Character.pas. It doesn't depend on locale options }
-  Result.FString := Character.ToLower(FString);
+  Result.FString := Char.ToLower(FString);
 end;
 
 function TString.ToString: string;
@@ -1532,7 +1532,7 @@ end;
 function TString.ToUpperInvariant: TString;
 begin
   { Use Character.pas. It doesn't depend on locale options }
-  Result.FString := Character.ToUpper(FString);
+  Result.FString := Char.ToUpper(FString);
 end;
 
 function TString.ToUTF8String: RawByteString;
@@ -1551,7 +1551,7 @@ begin
 
   { Find the left point }
   for I := 1 to System.Length(FString) do
-    if not Character.IsWhiteSpace(FString, I) then
+    if not Char.IsWhiteSpace(FString, I) then
     begin
       L := I;
       Break;
@@ -1559,7 +1559,7 @@ begin
 
   { Find the right point }
   for I := System.Length(FString) downto 1 do
-    if not Character.IsWhiteSpace(FString, I) then
+    if not Char.IsWhiteSpace(FString, I) then
     begin
       R := I;
       Break;
@@ -1603,7 +1603,7 @@ var
 begin
   { Loop until we get to the first non-whitespace char. We've determined that 1st char is whitespace. }
   for I := 1 to System.Length(FString) do
-    if not Character.IsWhiteSpace(FString, I) then
+    if not Char.IsWhiteSpace(FString, I) then
     begin
       { If nothing was done, take the ref, or copy otherwise }
       if I = 1 then
@@ -1666,7 +1666,7 @@ var
 begin
   { Loop until we get to the first non-whitespace char. We've determined that 1st char is whitespace. }
   for I := System.Length(FString) downto 1 do
-    if not Character.IsWhiteSpace(FString, I) then
+    if not Char.IsWhiteSpace(FString, I) then
     begin
       { If nothing was done, take the ref, or copy otherwise }
       if I = System.Length(FString) then

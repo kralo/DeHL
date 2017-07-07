@@ -252,7 +252,7 @@ end;
 procedure TTestHeap.TestCount;
 var
   LHeap: THeap<Integer>;
-  I: Integer;
+  I: NativeUInt;
 begin
   LHeap := THeap<Integer>.Create();
 

@@ -2667,22 +2667,22 @@ class procedure TConverter.RegisterUCS4Char;
 begin
   SetConverter(TypeInfo(UCS4Char), TypeInfo(ShortString),
    IInterface(function(const AIn: UCS4Char; out AOut: ShortString): Boolean
-     begin AOut := ShortString(ConvertFromUtf32(AIn)); Exit(true); end)
+     begin AOut := ShortString(Char.ConvertFromUtf32(AIn)); Exit(true); end)
   );
 
   SetConverter(TypeInfo(UCS4Char), TypeInfo(AnsiString),
    IInterface(function(const AIn: UCS4Char; out AOut: AnsiString): Boolean
-     begin AOut := AnsiString(ConvertFromUtf32(AIn)); Exit(true); end)
+     begin AOut := AnsiString(Char.ConvertFromUtf32(AIn)); Exit(true); end)
   );
 
   SetConverter(TypeInfo(UCS4Char), TypeInfo(WideString),
    IInterface(function(const AIn: UCS4Char; out AOut: WideString): Boolean
-     begin AOut := ConvertFromUtf32(AIn); Exit(true); end)
+     begin AOut := Char.ConvertFromUtf32(AIn); Exit(true); end)
   );
 
   SetConverter(TypeInfo(UCS4Char), TypeInfo(UnicodeString),
    IInterface(function(const AIn: UCS4Char; out AOut: UnicodeString): Boolean
-     begin AOut := ConvertFromUtf32(AIn); Exit(true); end)
+     begin AOut := Char.ConvertFromUtf32(AIn); Exit(true); end)
   );
 
   SetConverter(TypeInfo(UCS4Char), TypeInfo(UCS4String),
@@ -2692,12 +2692,12 @@ begin
 
   SetConverter(TypeInfo(UCS4Char), TypeInfo(WideChar),
    IInterface(function(const AIn: UCS4Char; out AOut: WideChar): Boolean
-     begin AOut := ConvertFromUtf32(AIn)[1]; Exit(true); end)
+     begin AOut := Char.ConvertFromUtf32(AIn)[1]; Exit(true); end)
   );
 
   SetConverter(TypeInfo(UCS4Char), TypeInfo(AnsiChar),
    IInterface(function(const AIn: UCS4Char; out AOut: AnsiChar): Boolean
-     begin AOut := AnsiString(ConvertFromUtf32(AIn))[1]; Exit(true); end)
+     begin AOut := AnsiString(Char.ConvertFromUtf32(AIn))[1]; Exit(true); end)
   );
 end;
 
