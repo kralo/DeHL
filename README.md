@@ -30,6 +30,8 @@ You can find more information about the library here:
 
 ## About this fork
 
+**As of 2017-07, this projects compiles with Delphi 10 Seattle 23.0. See  for failing Tests**
+
 This is a fork of the **discontinued** [*Delphi Helper Library*](https://github.com/pavkam/DeHL) by [Ciobanu Alexandru](https://github.com/pavkam).
 
 DeHL was *discontinued* on 09.01.2012.
